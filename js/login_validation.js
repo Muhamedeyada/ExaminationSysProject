@@ -1,13 +1,14 @@
 
-
-
+ let password = document.getElementById("password");
+ let errorPassword = document.getElementsByClassName("error")[1]
+ let email = document.getElementById("email");
+ let errorEmail = document.getElementsByClassName("error")[0]
 
 
 let open_eye = document.getElementById("eye1")
 
 function validEmail() {
-    let email = document.getElementById("email");
-    let errorEmail = document.getElementsByClassName("error")[0]
+    
     let regixEmail = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
     if (!regixEmail.test(email.value)) {
         email.setAttribute("class", "input-group__input__Error");
@@ -24,8 +25,7 @@ function validEmail() {
 
 
 function validPassword() {
-    let password = document.getElementById("password");
-    let errorPassword = document.getElementsByClassName("error")[1]
+   
     if (!password.value || password.value.length < 8) {
         password.setAttribute("class", "input-group__input__Error");
         errorPassword.style.display = "block";
@@ -75,31 +75,3 @@ function Pass_Eye() {
 }
 
 
-// Remember Me check box
-
-// const rememberBox=document.getElementById("rememberCheck");
-// if(localStorage.checkbox&&localStorage.checkbox !==""){
-//     rememberBox.setAttribute("checked","checked")
-//     password.value=localStorage.password
-//     email.value=localStorage.email
-// }
-// else{
-//     rememberBox.removeAttribute("checked")
-//     password.value=""
-//     email.value=""
-// }
-
-// function RememberMe(){
-//     if(rememberBox.checked &&!email.value &&!password.value){
-//         localStorage.email=email.value;
-//         localStorage.password=password.value
-//         localStorage.checkbox=rememberBox.value;
-
-//     }
-//     else{
-//         localStorage.email=""
-//         localStorage.password=""
-//         localStorage.checkbox=""
-//     }
-// }
-// localStorage.removeItem("checkbox")

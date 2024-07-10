@@ -1,8 +1,19 @@
 
+let fname = document.getElementById("fname");
+let errorFname = document.getElementsByClassName("error")[0]
+let lname = document.getElementById("lname");
+let errorLname = document.getElementsByClassName("error")[1]
+let email = document.getElementById("email");
+let errorEmail = document.getElementsByClassName("error")[2]
+let password = document.getElementById("password");
+let errorPassword = document.getElementsByClassName("error")[3]
+let re_password = document.getElementById("rePassword");
+let errorre_password = document.getElementsByClassName("error")[4]
+let open_eye = document.getElementById("eye1")
+let open_eye2 = document.getElementById("eye2")
 function validFName() {
 
-    let fname = document.getElementById("fname");
-    let errorFname = document.getElementsByClassName("error")[0]
+    
     regixName = /^[^\d]+$/;
     if (!regixName.test(fname.value)) {
         fname.setAttribute("class", "input-group__input__Error");
@@ -19,8 +30,7 @@ function validFName() {
 }
 
 function validLName() {
-    let lname = document.getElementById("lname");
-    let errorLname = document.getElementsByClassName("error")[1]
+   
     regixName = /^[^\d]+$/;
     if (!regixName.test(lname.value)) {
         lname.setAttribute("class", "input-group__input__Error");
@@ -34,8 +44,7 @@ function validLName() {
     }
 }
  function validEmail() {
-    let email = document.getElementById("email");
-    let errorEmail = document.getElementsByClassName("error")[2]
+    
     let regixEmail = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
     if (!regixEmail.test(email.value)) {
         email.setAttribute("class", "input-group__input__Error");
@@ -50,8 +59,7 @@ function validLName() {
 
 }
  function validPassword() {
-    let password = document.getElementById("password");
-    let errorPassword = document.getElementsByClassName("error")[3]
+    
     if (!password.value || password.value.length < 8) {
         password.setAttribute("class", "input-group__input__Error");
         errorPassword.style.display = "block";
@@ -65,8 +73,7 @@ function validLName() {
 
 }
 function validRe_Password() {
-    let re_password = document.getElementById("rePassword");
-    let errorre_password = document.getElementsByClassName("error")[4]
+   
     if ((re_password.value != password.value)) {
         re_password.setAttribute("class", "input-group__input__Error");
         errorre_password.style.display = "block";
@@ -100,7 +107,7 @@ function regestration(e) {
 let a;
 
 function Pass_Eye() {
-    let open_eye = document.getElementById("eye1")
+   
     if (a == 1) {
         open_eye.setAttribute("class", "fa-solid fa-eye-slash")
         password.setAttribute("type", "password")
@@ -114,7 +121,7 @@ function Pass_Eye() {
     }
 }
 function RePass_Eye() {
-    let open_eye2 = document.getElementById("eye2")
+  
     if (a == 1) {
 
         open_eye2.setAttribute("class", "fa-solid fa-eye-slash")
