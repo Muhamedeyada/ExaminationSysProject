@@ -1,0 +1,39 @@
+.log-main{
+    background-image:url("../../img/1.jpg");
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   &__div{
+    display: flex;
+    background-color: $light;
+    outline: 1px solid $dark-grey;
+    padding: 20px;
+
+   }
+   .input-group,.btn-remember,.Ebtn{
+      margin:20px;
+     }
+   .input-group,.btn-forget,.Ebtn{
+    margin-top: 40px;
+   }
+   .btn-forget{
+   display: flex;
+   justify-content: end;
+   a{
+    text-decoration: none;
+    color:$light-grey;
+   }
+
+}
+   .para{
+    display: flex;
+    justify-content: center;
+   }
+
+}
+
