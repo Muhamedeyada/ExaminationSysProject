@@ -1,0 +1,119 @@
+
+
+
+.result-container {
+  background-color: $light-grey;
+
+  background-position: center;
+
+  background-size: 100vw 100vh;
+
+  height: 100vh;
+  display: flex;
+  padding-top: 20px;
+
+  justify-content: center;
+  align-items: center;
+
+  #result-score {
+    background-color: transparent;
+    margin-top: 20px;
+    width: 700px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    h2 {
+      font-size: larger;
+      font-weight: 800;
+      color: $dark;
+      line-height: 40px;
+    }
+    h1 {
+      color: $dark;
+    }
+    &__score {
+      width: 200px;
+      background-color: $green-background;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+      border: 2px solid $light-grey;
+      margin-top: 10px;
+      
+      font-size: large;
+      font-weight: 600;
+      border-radius: 10px;
+      h1{
+        color: $light-grey;
+      }
+    }
+    #result-massege,
+    #saved-massege {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: "Courier New", Courier, monospace;
+      text-transform: capitalize;
+      text-justify: unset;
+      width: 600px;
+      height: auto;
+      padding: 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      border: 2px solid $light-grey;
+      margin-top: 5px;
+      font-size: larger;
+      color: $dark;
+      background-color: $light;
+      
+    }
+    #time {
+      display: flex;
+      height: auto;
+
+      h1 {
+        color: $dark;
+      }
+      img {
+        color: $warning;
+      }
+      background-color: $light;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: "Courier New", Courier, monospace;
+      text-transform: capitalize;
+      text-justify: unset;
+      width: 600px;
+      height: 200px;
+      padding: 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      border: 2px solid $light-grey;
+      margin-top: 5px;
+      font-size: larger;
+    }
+  }
+}
+
+
+@media (min-width:300px) and (max-width:650px){
+  .result-container{
+   
+   
+    #result-score{
+      
+      width: 100%;
+      #result-massege,#saved-massege,#time{
+        width: 100%;
+      }
+    }
+  }
+  
+     
+  
+ }

@@ -1,19 +1,17 @@
-
 // abstract
 @import "abstract/variable";
 // @import "abstract/mixins";
 
 //vendor
 
-
 //base
 @import "base/reset";
-
 
 //layout
 @import "layout/signUp";
 @import "layout/login";
-
+@import "layout/result";
+@import "layout/exam";
 
 //components
 @import "components/error";
@@ -21,12 +19,6 @@
 @import "components/head";
 @import "components/input";
 
-
-
-
 //pages
 
-
 //themes
-
-
