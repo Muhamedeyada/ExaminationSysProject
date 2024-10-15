@@ -122,12 +122,12 @@ function registration(e) {
     "Registration successful! Redirecting to login...";
   document.body.appendChild(successMessage);
   setTimeout(() => {
-    window.location.href = "login.html"; // Redirect to login page
-  }, 2000); // Redirect after 2 seconds
+    window.location.href = "../html/login.html";
+  }, 2000);
 }
 
-let eyeState1 = 0; // Initialize eye state for password visibility
-let eyeState2 = 0; // Initialize eye state for re-password visibility
+let eyeState1 = 0;
+let eyeState2 = 0;
 
 function togglePasswordVisibility(input, eyeIcon, state) {
   if (state === 1) {
