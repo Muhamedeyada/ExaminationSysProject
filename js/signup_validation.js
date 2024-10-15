@@ -1,73 +1,84 @@
 let fname = document.getElementById("fname");
-let errorFname = document.getElementsByClassName("error")[0];
-function validFName() {
-  regixName = /^[^\d]+$/;
-  if (!regixName.test(fname.value)) {
-    fname.setAttribute("class", "input-group__input__Error");
-    errorFname.style.display = "block";
-    return false;
-  } else {
-    fname.setAttribute("class", "input-group__input");
-    errorFname.style.display = "none";
-    return fname.value;
-  }
-}
 let lname = document.getElementById("lname");
-let errorLname = document.getElementsByClassName("error")[1];
+let email = document.getElementById("email");
+let password = document.getElementById("password");
+let re_password = document.getElementById("rePassword");
+
+function showError(input, message) {
+  const errorElement = input.parentElement.querySelector(".error");
+  errorElement.textContent = message;
+  errorElement.style.display = "block";
+}
+
+function clearError(input) {
+  const errorElement = input.parentElement.querySelector(".error");
+  errorElement.style.display = "none";
+}
+
+function validFName() {
+  const regixName = /^[^\d]+$/;
+  if (!fname.value.trim()) {
+    showError(fname, "First name cannot be empty.");
+    return false;
+  } else if (!regixName.test(fname.value)) {
+    showError(fname, "Please write the correct name.");
+    return false;
+  }
+  clearError(fname);
+  return true;
+}
 
 function validLName() {
-  regixName = /^[^\d]+$/;
-  if (!regixName.test(lname.value)) {
-    lname.setAttribute("class", "input-group__input__Error");
-    errorLname.style.display = "block";
+  const regixName = /^[^\d]+$/;
+  if (!lname.value.trim()) {
+    showError(lname, "Last name cannot be empty.");
     return false;
-  } else {
-    lname.setAttribute("class", "input-group__input");
-    errorLname.style.display = "none";
-    return lname.value;
+  } else if (!regixName.test(lname.value)) {
+    showError(lname, "Please write the correct name.");
+    return false;
   }
+  clearError(lname);
+  return true;
 }
-let email = document.getElementById("email");
-let errorEmail = document.getElementsByClassName("error")[2];
+
 function validEmail() {
-  let regixEmail = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
-  if (!regixEmail.test(email.value)) {
-    email.setAttribute("class", "input-group__input__Error");
-    errorEmail.style.display = "block";
+  const regixEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email.value.trim()) {
+    showError(email, "Email cannot be empty.");
     return false;
-  } else {
-    email.setAttribute("class", "input-group__input");
-    errorEmail.style.display = "none";
-    return email.value;
+  } else if (!regixEmail.test(email.value)) {
+    showError(email, "Please write the correct email.");
+    return false;
   }
+  clearError(email);
+  return true;
 }
-let password = document.getElementById("password");
-let errorPassword = document.getElementsByClassName("error")[3];
+
 function validPassword() {
-  if (!password.value || password.value.length < 8) {
-    password.setAttribute("class", "input-group__input__Error");
-    errorPassword.style.display = "block";
+  if (!password.value.trim()) {
+    showError(password, "Password cannot be empty.");
     return false;
-  } else {
-    password.setAttribute("class", "input-group__input");
-    errorPassword.style.display = "none";
-    return password.value;
+  } else if (password.value.length < 8) {
+    showError(password, "Please write a password longer than 8 characters.");
+    return false;
   }
+  clearError(password);
+  return true;
 }
-let re_password = document.getElementById("rePassword");
-let errorre_password = document.getElementsByClassName("error")[4];
+
 function validRe_Password() {
-  if (re_password.value != password.value) {
-    re_password.setAttribute("class", "input-group__input__Error");
-    errorre_password.style.display = "block";
+  if (!re_password.value.trim()) {
+    showError(re_password, "Please re-enter your password.");
     return false;
-  } else {
-    re_password.setAttribute("class", "input-group__input");
-    errorre_password.style.display = "none";
-    return re_password.value;
+  } else if (re_password.value !== password.value) {
+    showError(re_password, "Please write the same password.");
+    return false;
   }
+  clearError(re_password);
+  return true;
 }
-class user {
+
+class User {
   constructor(fname, lname, email, password) {
     this.fname = fname;
     this.lname = lname;
@@ -75,9 +86,10 @@ class user {
     this.password = password;
   }
 }
-function regestration(e) {
-  let userList = JSON.parse(localStorage.getItem("userList")) || [];
-   console.log(userList)
+
+function registration(e) {
+  e.preventDefault(); // Prevent form submission
+
   if (
     !validFName() ||
     !validLName() ||
@@ -85,51 +97,56 @@ function regestration(e) {
     !validPassword() ||
     !validRe_Password()
   ) {
-    e.preventDefault();
-    return false;
+    return; // Stop if validation fails
   }
 
-  const newUser = new user(
+  let userList = JSON.parse(localStorage.getItem("userList")) || [];
+  const newUser = new User(
     fname.value,
     lname.value,
     email.value,
     password.value
   );
-  const emailStored = userList.some((user) => user.email === email.value);
 
-  if (emailStored) {
-    alert("Email address already registered!");
-    e.preventDefault();
-    return false;
+  if (userList.some((user) => user.email === email.value)) {
+    showError(email, "Email address already registered!");
+    return;
   }
 
   userList.push(newUser);
   localStorage.setItem("userList", JSON.stringify(userList));
-  
+
+  // Show success message and redirect after a short delay
+  const successMessage = document.createElement("div");
+  successMessage.textContent =
+    "Registration successful! Redirecting to login...";
+  document.body.appendChild(successMessage);
+  setTimeout(() => {
+    window.location.href = "login.html"; // Redirect to login page
+  }, 2000); // Redirect after 2 seconds
 }
-let a;
+
+let eyeState1 = 0; // Initialize eye state for password visibility
+let eyeState2 = 0; // Initialize eye state for re-password visibility
+
+function togglePasswordVisibility(input, eyeIcon, state) {
+  if (state === 1) {
+    eyeIcon.setAttribute("class", "fa-solid fa-eye-slash");
+    input.setAttribute("type", "password");
+    return 0;
+  } else {
+    eyeIcon.setAttribute("class", "fa-solid fa-eye");
+    input.setAttribute("type", "text");
+    return 1;
+  }
+}
 
 function Pass_Eye() {
-  let open_eye = document.getElementById("eye1");
-  if (a == 1) {
-    open_eye.setAttribute("class", "fa-solid fa-eye-slash");
-    password.setAttribute("type", "password");
-    a = 0;
-  } else {
-    open_eye.setAttribute("class", "fa-solid fa-eye");
-    password.setAttribute("type", "text");
-    a = 1;
-  }
+  const open_eye = document.getElementById("eye1");
+  eyeState1 = togglePasswordVisibility(password, open_eye, eyeState1);
 }
+
 function RePass_Eye() {
-  let open_eye2 = document.getElementById("eye2");
-  if (a == 1) {
-    open_eye2.setAttribute("class", "fa-solid fa-eye-slash");
-    re_password.setAttribute("type", "password");
-    a = 0;
-  } else {
-    open_eye2.setAttribute("class", "fa-solid fa-eye");
-    re_password.setAttribute("type", "text");
-    a = 1;
-  }
+  const open_eye2 = document.getElementById("eye2");
+  eyeState2 = togglePasswordVisibility(re_password, open_eye2, eyeState2);
 }
